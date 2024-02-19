@@ -255,7 +255,6 @@ class CollectionContents(WebflowStream):
 
 
 class SourceWebflow(AbstractSource):
-
     """This is the main class that defines the methods that will be called by Airbyte infrastructure"""
 
     @staticmethod

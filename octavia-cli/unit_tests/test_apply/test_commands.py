@@ -104,7 +104,12 @@ def test_apply_single_resource(patch_click, mocker, resource_was_created):
     "force,user_validation,local_file_changed,expect_update,expected_reason",
     [
         pytest.param(
-            True, True, True, True, "🚨 - Running update because the force mode is activated.", id="1 - Check if force has the top priority."
+            True,
+            True,
+            True,
+            True,
+            "🚨 - Running update because the force mode is activated.",
+            id="1 - Check if force has the top priority.",
         ),
         pytest.param(
             True,

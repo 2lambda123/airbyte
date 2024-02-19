@@ -51,18 +51,20 @@ class StreamFacadeSource(AbstractSource):
                 stream.logger,
                 self._max_workers,
                 state_converter.get_concurrent_stream_state(state_manager.get_stream_state(stream.name, stream.namespace)),
-                ConcurrentCursor(
-                    stream.name,
-                    stream.namespace,
-                    state_converter.get_concurrent_stream_state(state_manager.get_stream_state(stream.name, stream.namespace)),
-                    self.message_repository,  # type: ignore  # for this source specifically, we always return `InMemoryMessageRepository`
-                    state_manager,
-                    state_converter,
-                    self._cursor_field,
-                    self._cursor_boundaries,
-                )
-                if self._cursor_field
-                else NoopCursor(),
+                (
+                    ConcurrentCursor(
+                        stream.name,
+                        stream.namespace,
+                        state_converter.get_concurrent_stream_state(state_manager.get_stream_state(stream.name, stream.namespace)),
+                        self.message_repository,  # type: ignore  # for this source specifically, we always return `InMemoryMessageRepository`
+                        state_manager,
+                        state_converter,
+                        self._cursor_field,
+                        self._cursor_boundaries,
+                    )
+                    if self._cursor_field
+                    else NoopCursor()
+                ),
             )
             for stream in self._streams
         ]

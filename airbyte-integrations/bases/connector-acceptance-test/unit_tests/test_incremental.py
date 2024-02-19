@@ -499,36 +499,44 @@ async def test_per_stream_read_with_multiple_states(mocker, first_records, subse
 
     if run_per_stream_test:
         call_read_output_messages = [
-            build_per_stream_state_message(
-                descriptor=StreamDescriptor(name=record["name"]), stream_state=record["stream_state"], data=record.get("data", None)
-            )
-            if record["type"] == Type.STATE
-            else build_record_message(record["name"], record["data"])
-            for record in list(first_records)
-        ]
-        call_read_with_state_output_messages = [
-            [
+            (
                 build_per_stream_state_message(
                     descriptor=StreamDescriptor(name=record["name"]), stream_state=record["stream_state"], data=record.get("data", None)
                 )
                 if record["type"] == Type.STATE
-                else build_record_message(stream=record["name"], data=record["data"])
+                else build_record_message(record["name"], record["data"])
+            )
+            for record in list(first_records)
+        ]
+        call_read_with_state_output_messages = [
+            [
+                (
+                    build_per_stream_state_message(
+                        descriptor=StreamDescriptor(name=record["name"]), stream_state=record["stream_state"], data=record.get("data", None)
+                    )
+                    if record["type"] == Type.STATE
+                    else build_record_message(stream=record["name"], data=record["data"])
+                )
                 for record in state_records_group
             ]
             for state_records_group in list(subsequent_records)
         ]
     else:
         call_read_output_messages = [
-            build_state_message(state=record.get("data") or {record["name"]: record["stream_state"]})
-            if record["type"] == Type.STATE
-            else build_record_message(stream=record["name"], data=record["data"])
+            (
+                build_state_message(state=record.get("data") or {record["name"]: record["stream_state"]})
+                if record["type"] == Type.STATE
+                else build_record_message(stream=record["name"], data=record["data"])
+            )
             for record in list(first_records)
         ]
         call_read_with_state_output_messages = [
             [
-                build_state_message(state=record.get("data") or {record["name"]: record["stream_state"]})
-                if record["type"] == Type.STATE
-                else build_record_message(stream=record["name"], data=record["data"])
+                (
+                    build_state_message(state=record.get("data") or {record["name"]: record["stream_state"]})
+                    if record["type"] == Type.STATE
+                    else build_record_message(stream=record["name"], data=record["data"])
+                )
                 for record in state_records_group
             ]
             for state_records_group in list(subsequent_records)
@@ -593,11 +601,13 @@ async def test_state_skip_test(mocker):
     ]
 
     call_read_output_messages = [
-        build_per_stream_state_message(
-            descriptor=StreamDescriptor(name=record["name"]), stream_state=record["stream_state"], data=record.get("data", None)
+        (
+            build_per_stream_state_message(
+                descriptor=StreamDescriptor(name=record["name"]), stream_state=record["stream_state"], data=record.get("data", None)
+            )
+            if record["type"] == Type.STATE
+            else build_record_message(record["name"], record["data"])
         )
-        if record["type"] == Type.STATE
-        else build_record_message(record["name"], record["data"])
         for record in list(first_records)
     ]
 
