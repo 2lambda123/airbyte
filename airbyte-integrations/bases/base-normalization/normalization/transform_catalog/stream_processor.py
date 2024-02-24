@@ -1402,9 +1402,9 @@ where 1 = 1
         elif self.destination_type == DestinationType.SNOWFLAKE:
             # see https://docs.getdbt.com/reference/resource-configs/snowflake-configs
             if partition_by == PartitionScheme.ACTIVE_ROW:
-                config[
-                    "cluster_by"
-                ] = f'["_AIRBYTE_ACTIVE_ROW", "{self.airbyte_unique_key.upper()}_SCD", "{self.airbyte_emitted_at.upper()}"]'
+                config["cluster_by"] = (
+                    f'["_AIRBYTE_ACTIVE_ROW", "{self.airbyte_unique_key.upper()}_SCD", "{self.airbyte_emitted_at.upper()}"]'
+                )
             elif partition_by == PartitionScheme.UNIQUE_KEY:
                 config["cluster_by"] = f'["{self.airbyte_unique_key.upper()}", "{self.airbyte_emitted_at.upper()}"]'
             elif partition_by == PartitionScheme.NOTHING:

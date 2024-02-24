@@ -722,7 +722,6 @@ class MetafieldCollections(MetafieldShopifySubstream):
 
 
 class BalanceTransactions(IncrementalShopifyStream):
-
     """
     PaymentsTransactions stream does not support Incremental Refresh based on datetime fields, only `since_id` is supported:
     https://shopify.dev/api/admin-rest/2021-07/resources/transactions

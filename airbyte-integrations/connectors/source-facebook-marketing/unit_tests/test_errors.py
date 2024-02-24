@@ -96,7 +96,7 @@ CONFIG_ERRORS = [
                     "code": 100,
                 }
             },
-        }
+        },
         # Error randomly happens for different connections.
         # Can be reproduced on https://developers.facebook.com/tools/explorer/?method=GET&path=act_<ad_account_id>&version=v17.0
         # 1st reason: incorrect ad account id is used
@@ -166,7 +166,7 @@ CONFIG_ERRORS = [
                     "error_user_msg": "profile should always be linked to delegate page",
                 }
             },
-        }
+        },
         # Error happens on Video stream: https://graph.facebook.com/v17.0/act_XXXXXXXXXXXXXXXX/advideos
         # Recommendations says that the problem can be fixed by switching to Business Ad Account Id
     ),
@@ -274,7 +274,7 @@ class TestRealErrors:
                             "code": 1,
                         }
                     },
-                }
+                },
                 # It can be a temporal problem:
                 # Happened during 'ad_account' stream sync which always returns only 1 record.
                 # Potentially could be caused by some particular field (list of requested fields is constant).
