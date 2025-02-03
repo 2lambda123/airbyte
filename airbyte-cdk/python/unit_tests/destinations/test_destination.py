@@ -95,7 +95,7 @@ def write_file(path: PathLike, content: Union[str, Mapping]):
 
 
 def _wrapped(
-    msg: Union[AirbyteRecordMessage, AirbyteStateMessage, AirbyteCatalog, ConnectorSpecification, AirbyteConnectionStatus]
+    msg: Union[AirbyteRecordMessage, AirbyteStateMessage, AirbyteCatalog, ConnectorSpecification, AirbyteConnectionStatus],
 ) -> AirbyteMessage:
     if isinstance(msg, AirbyteRecordMessage):
         return AirbyteMessage(type=Type.RECORD, record=msg)
