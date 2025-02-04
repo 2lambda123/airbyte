@@ -9,12 +9,12 @@ repos:
         args:
           ["--tmpl=LICENSE_SHORT", "--ext=py", "-x=**/models/__init__.py", "-f"]
   - repo: https://github.com/psf/black
-    rev: 24.10.0
+    rev: 25.1.0
     hooks:
       - id: black
         args: ["--config", "pyproject.toml"]
   - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
+    rev: 6.0.0
     hooks:
       - id: isort
         args:
